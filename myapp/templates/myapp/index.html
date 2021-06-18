@@ -1,0 +1,18 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+MyApp
+{% endblock title %}
+
+{% block content %}
+{% if customer_list %}
+<ul>
+{% for customer in customer_list %}
+    <li>
+        <a href="{% url 'myapp:update' customer.id %}">{{customer}}</a>
+    </li>
+{% endfor %}
+</ul>
+{% endif %}
+    <p><a href="{% url 'myapp:create' %}">addnew</a></p>
+{% endblock content %}

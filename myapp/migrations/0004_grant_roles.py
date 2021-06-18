@@ -12,18 +12,18 @@ class Migration(migrations.Migration):
     operations = [
         # アプリからデータアクセスを許可する（tenant_usersは必須）
         migrations.RunSQL("""
-            GRANT select, insert ON myapp_tenant TO tenantuser;
-            GRANT select, insert ON myapp_tenantuser TO tenantuser;
-            GRANT select, insert ON myapp_customer TO tenantuser;
-            GRANT select, insert ON myapp_tenantuser_groups TO tenantuser;
-            GRANT select, insert ON myapp_tenantuser_user_permissions TO tenantuser;
+            GRANT select, insert, update, delete ON myapp_tenant TO tenantuser;
+            GRANT select, insert, update, delete ON myapp_tenantuser TO tenantuser;
+            GRANT select, insert, update, delete ON myapp_customer TO tenantuser;
+            GRANT select, insert, update, delete ON myapp_tenantuser_groups TO tenantuser;
+            GRANT select, insert, update, delete ON myapp_tenantuser_user_permissions TO tenantuser;
         """,
         reverse_sql="""
-            REVOKE select, insert ON myapp_tenant FROM tenantuser;
-            REVOKE select, insert ON myapp_tenantuser FROM tenantuser;
-            REVOKE select, insert ON myapp_customer FROM tenantuser;
-            REVOKE select, insert ON myapp_tenantuser_groups FROM tenantuser;
-            REVOKE select, insert ON myapp_tenantuser_user_permissions FROM tenantuser;
+            REVOKE select, insert, update, delete ON myapp_tenant FROM tenantuser;
+            REVOKE select, insert, update, delete ON myapp_tenantuser FROM tenantuser;
+            REVOKE select, insert, update, delete ON myapp_customer FROM tenantuser;
+            REVOKE select, insert, update, delete ON myapp_tenantuser_groups FROM tenantuser;
+            REVOKE select, insert, update, delete ON myapp_tenantuser_user_permissions FROM tenantuser;
         """),
         # RLS設定
         migrations.RunSQL("""

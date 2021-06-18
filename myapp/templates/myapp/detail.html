@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Detail
+{% endblock title %}
+
+{% block content %}
+<form id="detail_form" method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="登録">
+</form>
+{% endblock content %}
