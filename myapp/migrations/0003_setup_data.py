@@ -36,7 +36,7 @@ def migrate_data(apps, schema_editor):
 
 def reverse_data(apps, schema_editor):
     Tenant = apps.get_model('myapp', 'Tenant')
-    Tenant.objects.filter(tenant_key__in=['beproud', 'cmscom']).delete()
+    Tenant.objects.filter(tenant_key__in=['xxx', 'yyy']).delete()
 
 
 class Migration(migrations.Migration):

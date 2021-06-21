@@ -54,3 +54,28 @@ class Customer(models.Model):
 
     def get_absolute_url(self):
         return reverse("Customer_detail", kwargs={"pk": self.pk})
+
+class AppPermission(models.Model):
+    """
+    画面の表示権限
+    """
+    
+    id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
+    view = models.CharField(max_length=50)
+    tenant = models.ForeignKey(Tenant, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = _("AppPermission")
+        verbose_name_plural = _("AppPermissions")
+        constraints = [
+            models.UniqueConstraint(
+                fields=['tenant','view'],
+                name='app_permission_tenant_unique'
+            )
+        ]
+
+    def __str__(self):
+        return self.view
+
+    def get_absolute_url(self):
+        return reverse("AppPermission_detail", kwargs={"pk": self.pk})

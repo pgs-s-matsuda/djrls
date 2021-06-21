@@ -21,3 +21,6 @@ def on_create_tenant(sender, instance, created, **kwargs):
             cursur.execute(f'GRANT tenantuser TO "{tenant_role}"')
 
 post_save.connect(on_create_tenant, sender=models.Tenant)
+
+
+admin.site.register(models.AppPermission)
