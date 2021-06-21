@@ -1,18 +1,14 @@
 {% extends 'base/base.html' %}
 
 {% block title %}
-MyApp
+Home
 {% endblock title %}
 
 {% block content %}
-{% if customer_list %}
+Home
 <ul>
-{% for customer in customer_list %}
-    <li>
-        <a href="{% url 'myapp:update' customer.id %}">{{customer}}</a>
-    </li>
-{% endfor %}
+    <li><a href="{% url 'myapp:customerindex' %}" >顧客</a></li>
+    <li><a href="{% url 'myapp:app1index' %}">App1</a></li>
+    <li><a href="{% url 'myapp:app2index' %}">App2</a></li>
 </ul>
-{% endif %}
-    <p><a href="{% url 'myapp:create' %}">addnew</a></p>
 {% endblock content %}
