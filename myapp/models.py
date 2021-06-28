@@ -4,8 +4,9 @@ from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 from django.contrib.auth.models import AbstractUser
 
+
 class Tenant(models.Model):
-    
+
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     tenant_key = models.CharField(max_length=50, unique=True)
     tenant_name = models.CharField(max_length=100)
@@ -20,8 +21,9 @@ class Tenant(models.Model):
     def get_absolute_url(self):
         return reverse("Tenant_detail", kwargs={"pk": self.pk})
 
+
 class TenantUser(AbstractUser):
-    
+
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     tenant = models.ForeignKey(Tenant, on_delete=models.CASCADE, null=True)
 
@@ -35,8 +37,9 @@ class TenantUser(AbstractUser):
     def get_absolute_url(self):
         return reverse("TenantUser_detail", kwargs={"pk": self.pk})
 
+
 class Customer(models.Model):
-    
+
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
 
     tenant = models.ForeignKey(Tenant, on_delete=models.CASCADE)
@@ -55,11 +58,12 @@ class Customer(models.Model):
     def get_absolute_url(self):
         return reverse("Customer_detail", kwargs={"pk": self.pk})
 
+
 class AppPermission(models.Model):
     """
     画面の表示権限
     """
-    
+
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     view = models.CharField(max_length=50)
     tenant = models.ForeignKey(Tenant, on_delete=models.CASCADE)
@@ -69,7 +73,7 @@ class AppPermission(models.Model):
         verbose_name_plural = _("AppPermissions")
         constraints = [
             models.UniqueConstraint(
-                fields=['tenant','view'],
+                fields=['tenant', 'view'],
                 name='app_permission_tenant_unique'
             )
         ]

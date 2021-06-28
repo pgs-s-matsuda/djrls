@@ -1,7 +1,7 @@
 from django import forms
-from django.db.models import fields
 
 from myapp.models import Customer
+
 
 class CustomerForm(forms.ModelForm):
     class Meta:

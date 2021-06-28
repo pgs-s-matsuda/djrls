@@ -8,10 +8,12 @@ from myapp import models
 admin.site.register(models.Tenant)
 admin.site.register(models.TenantUser, UserAdmin)
 
+
 @admin.register(models.Customer)
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'address', 'tel', 'email', 'tenant')
     list_display_links = ('id', 'name')
+
 
 def on_create_tenant(sender, instance, created, **kwargs):
     if created:
@@ -19,6 +21,7 @@ def on_create_tenant(sender, instance, created, **kwargs):
         with connection.cursor() as cursur:
             cursur.execute(f'CREATE ROLE "{tenant_role}"')
             cursur.execute(f'GRANT tenantuser TO "{tenant_role}"')
+
 
 post_save.connect(on_create_tenant, sender=models.Tenant)
 
